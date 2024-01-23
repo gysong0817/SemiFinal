@@ -1,0 +1,29 @@
+[맛집 소개 게시판]
+
+Database : 회원 및 관리자 / 게시글 / 댓글
+
+회원 및 관리자 (User)
+	userNo INT (Primary Key)	: 회원번호
+	userId VARCHAR				: 아이디
+	password VARCHAR			: 비밀번호
+	name VARCHAR				: 이름
+	gender VARCHAR				: 성별
+	phone VARCHAR				: 전화번호
+
+게시판 (Board)
+	boardNo INT (Primary Key)	: 게시글 번호
+	title VARCHAR				: 제목
+	content VARCHAR 			: 내용
+	userId VARCHAR (Foreign Key): 작성자 아이디
+	regDate DATE 				: 작성날짜
+	modDate DATE 				: 수정날짜
+	viewCnt	INT					: 조회수
+
+댓글 (Comment)
+	commentNo INT (Primary Key)	: 댓글번호
+	boardNo INT (Foreign Key)	: 게시글 번호
+	content VARCHAR				: 내용
+	userId VARCHAR (Foreign Key): 댓글 작성자 아이디
+	regDate DATE				: 작성날짜
+	modDate DATE				: 수정날짜
+
