@@ -1,5 +1,8 @@
 package com.miniproject.mapper;
 
-public class BoardMapper {
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
+public interface BoardMapper {
+	
 }
