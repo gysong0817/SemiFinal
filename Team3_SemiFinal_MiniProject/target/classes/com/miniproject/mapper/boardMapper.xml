@@ -2,4 +2,33 @@
 <!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper>
   <cache-ref namespace="com.miniproject.mapper.boardMapper"/>
+  
+	<select id="getAllBoard" resultType="com.miniproject.dto.BoardDTO">
+		SELECT * FROM board;
+	</select>
+	
+	<select id="getBoardByBoardNo" parameterType="_int" resultType="com.miniproject.dto.BoardDTO">
+		SELECT * FROM board WHERE boardNo = #{boardNO}
+	</select>
+	
+	<insert id="insertBoard" parameterType="com.miniproject.dto.BoardDTO">
+        INSERT INTO board (title, content, userId, regDate, modDate, viewCnt, categoryIdx)
+        VALUES (#{title}, #{content}, #{userId}, #{regDate}, #{modDate}, #{viewCnt}, #{categoryIdx})
+    </insert>
+	
+	<update id="updateBoard"
+			parameterType="com.miniproject.dto.BoardDTO">
+		UPDATE board
+		SET title = #{title},
+			content = #{content}
+		WHERE boardNo = #{boardNo}
+	</update>
+	
+	<delete id="deleteBoardByBoradNo" 
+			parameterType="_int">
+		DELETE 
+		FROM boardNo
+		WHERE boardNo =#{boardNo}
+	</delete>
+	
 </mapper>
