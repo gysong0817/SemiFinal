@@ -20,9 +20,11 @@ public class BoardDTO {
 	private Date regDate;
 	private Date modDate;
 	private int viewCnt;
+	private int catgegoryIdx;
 	
 	@Builder
-	public BoardDTO(int boardNo, String title, String content, String userId, Date regDate, Date modDate, int viewCnt) {
+	public BoardDTO(int boardNo, String title, String content, String userId, Date regDate, Date modDate, int viewCnt,
+			int catgegoryIdx) {
 		super();
 		this.boardNo = boardNo;
 		this.title = title;
@@ -31,5 +33,8 @@ public class BoardDTO {
 		this.regDate = regDate;
 		this.modDate = modDate;
 		this.viewCnt = viewCnt;
+		this.catgegoryIdx = catgegoryIdx;
 	}
+	
+	
 }
