@@ -32,7 +32,4 @@ public class BoardDTO {
 		this.modDate = modDate;
 		this.viewCnt = viewCnt;
 	}
-	
-	
-	
 }
