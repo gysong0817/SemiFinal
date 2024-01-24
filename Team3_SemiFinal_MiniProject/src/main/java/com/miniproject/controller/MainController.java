@@ -23,6 +23,7 @@ public class MainController {
 		List<BoardDTO> boardList = service.getAllBoard();
 		model.addAttribute("boardList", boardList);
 		
+		System.out.println(boardList);
 		return "main";
 	}
 }

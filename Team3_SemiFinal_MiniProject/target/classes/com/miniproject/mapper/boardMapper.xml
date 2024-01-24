@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.miniproject.mapper.boardMapper">
+<mapper namespace="com.miniproject.mapper.BoardMapper">
   
 	<select id="getAllBoard" resultType="com.miniproject.dto.BoardDTO">
-		SELECT * FROM board;
+		SELECT title, content, userId, regDate, modDate, viewCnt, categoryIdx
+		FROM board
 	</select>
 	
 	<select id="getBoardByBoardNo" parameterType="_int" resultType="com.miniproject.dto.BoardDTO">
-		SELECT * FROM board WHERE boardNo = #{boardNO}
+		SELECT * FROM board 
+		WHERE boardNo = #{boardNO}
 	</select>
 	
 	<insert id="insertBoard" parameterType="com.miniproject.dto.BoardDTO">
@@ -27,7 +29,7 @@
 			parameterType="_int">
 		DELETE 
 		FROM boardNo
-		WHERE boardNo =#{boardNo}
+		WHERE boardNo = #{boardNo}
 	</delete>
 	
 </mapper>
