@@ -86,6 +86,7 @@
             </tr>
         </thead>
         <tbody>
+<<<<<<< .merge_file_a01280
             <c:forEach items="${boardList}" var="board">
                 <tr>
                     <td>${board.boardNo}</td>
@@ -102,6 +103,70 @@
     </table>
 </c:if>
 
+=======
+        <div>
+		<form id="mainForm" class="row justify-content-center g-3" action="/main" method="GET" onsubmit="checkKeyword()">
+			<div class="col-auto">
+				<label for="keyword" class="visually-hidden">Search</label> 
+					<input	
+						type="text" 
+						class="form-control" 
+						id="searchKeyword"
+						placeholder="SearchKeyword" 
+						name="searchKeyword"
+						value="${pageInfo.pageRequest.searchKeyword}">
+					<!-- hidden -->
+					<input name="pageNum" type="hidden" value="${pageInfo.pageRequest.pageNum}">
+					<input name="amount" type="hidden" value="${pageInfo.pageRequest.amount}">
+			</div>
+			<div class="col-auto">
+				<input type="submit" class="btn btn-primary mb-3" value="Search" />
+			</div>
+		</form>
+	</div>
+	          <c:forEach items="${boardList}" var="board">
+	              <tr>
+	                  <td>${board.boardNo}</td>
+	                  <td><a class="board-link" href="<c:url value='/board/${board.boardNo}'/>">${board.title}</a></td>
+	                  <td style="display: none;">${board.content}</td>
+	                  <td>${board.userId}</td>
+	                  <td>${board.regDate}</td>
+	                  <td>${board.modDate}</td>
+	                  <td>${board.viewCnt}</td>
+	                  <td>${board.categoryIdx}</td>
+	              </tr>
+	          </c:forEach>
+        </tbody>
+    </table>
+</c:if>
+	<div class="row justify-content-center">
+		<div class="col-auto">
+			<nav class="page navigation">
+				<ul class="pagination">
+					<c:if test="${pageInfo.prev}">
+						<li class="page-item">
+							<a class="page-link" aria-label="Previous" 
+								href="/main?pageNum=${pageInfo.startPage - 1}&amount=${pageInfo.pageRequest.amount}">Prev</a>
+						</li>
+					</c:if>
+					<c:forEach var="num" begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
+						<li class="page-item ${pageInfo.pageRequest.pageNum == num ? "active" : "" } ">
+							<a class="page-link" 
+								href="/main?pageNum=${num}&amount=${pageInfo.pageRequest.amount}&searchKeyword=${pageInfo.pageRequest.searchKeyword}">${num}</a>
+						</li>
+					</c:forEach>
+					<c:if test="${pageInfo.next}">
+						<li class="page-item next">
+							<a class="page-link" aria-label="next" 
+								href="/main?pageNum=${pageInfo.endPage + 1}&amount=${pageInfo.pageRequest.amount}">Next</a>
+						</li>
+					</c:if>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+>>>>>>> .merge_file_a10500
 <a class="new-post-btn" href="<c:url value='/new-post'/>">새로운 글 작성</a>
 <c:if test="${empty userId}">
     <a class="signup-btn" href="<c:url value='/signup'/>">Sign Up</a>
@@ -111,13 +176,18 @@
     <a class="logout-btn" href="<c:url value='/logout'/>">Logout</a>
 </c:if>
 
+<<<<<<< .merge_file_a01280
 <script>
+=======
+<script type="text/javascript">
+>>>>>>> .merge_file_a10500
     document.addEventListener("DOMContentLoaded", function () {
         var boardLinks = document.querySelectorAll('.board-link');
 
         boardLinks.forEach(function (link) {
             link.addEventListener('click', function (event) {
                 event.preventDefault();
+<<<<<<< .merge_file_a01280
 
                 var boardNo = link.getAttribute('href').split('/').pop();
 
@@ -127,6 +197,46 @@
     });
 </script>
 
+=======
+                var contentElement = event.target.parentNode.nextElementSibling;
+                var content = contentElement.innerText;
+
+                // Redirect to the board detail page with the board No
+                var boardNo = link.getAttribute('href').split('/').pop();
+                window.location.href = "/board/" + boardNo;
+            });
+        });
+    });
+    
+	Array.from(document.getElementsByClassName('page-link'))
+	.forEach((pagingButton) => {
+		pagingButton.addEventListener('click', function(e) {
+			e.preventDefault();
+			// step02 : 등록 후, action : '/main' 으로 요청 시, keyword 값 유무에 따라 queryString 변경
+			// step03 : 요청
+			let mainForm = document.getElementById('mainForm');
+			
+			// 현재 페이지 값으로 변경하여 /main 요청하도록 지정
+			mainForm.pageNum.value = e.target.innerHTML;
+			
+			if(mainForm.searchKeyword.value === '' || mainForm.searchKeyword.value === null) {
+				mainForm.searchKeyword.remove();
+			}
+			
+			mainForm.action = '/main';
+			mainForm.method = 'GET';
+			mainForm.submit();
+		})
+})
+
+function checkKeyword() {
+	let mainForm = document.getElementById('mainForm');
+	if(mainForm.searchKeyword.value === null || mainForm.searchKeyword.value === '') {
+		mainForm.searchKeyword.remove();
+	}
+}
+</script>
+>>>>>>> .merge_file_a10500
 
 </body>
 </html>
