@@ -3,7 +3,7 @@
 <mapper namespace="com.miniproject.mapper.BoardMapper">
   
 	<select id="getAllBoard" resultType="com.miniproject.dto.BoardDTO">
-		SELECT title, content, userId, regDate, modDate, viewCnt, categoryIdx
+		SELECT boardNo, title, content, userId, regDate, modDate, viewCnt, categoryIdx
 		FROM board
 	</select>
 	
