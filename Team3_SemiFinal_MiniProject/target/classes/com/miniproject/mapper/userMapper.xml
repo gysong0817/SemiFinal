@@ -1,5 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.miniproject.mapper.userMapper">
+<mapper namespace="com.miniproject.mapper.UserMapper">
+	
+	<select id="getUserByUserId" parameterType="string" resultType="com.miniproject.dto.UserDTO">
+		SELECT userNo, userId, password, name, gender, phone, admin FROM user WHERE userId = #{userId}
+	</select>
+	
+	<select id="getUserNoByUserId" parameterType="string" resultType="_int">
+		SELECT userNo FROM user WHERE userId = #{userId}
+	</select>
+	
+	<insert id="insertUser" parameterType="com.miniproject.dto.UserDTO">
+		INSERT INTO user (userNo, userId, password, name, gender, phone, admin)
+		VALUES (#{userNo}, #{userId}, #{password}, #{name}, #{gender}, #{phone}, #{admin})
+	</insert>
+	
+	<update id="updateUser" parameterType="com.miniproject.dto.UserDTO">
+		UPDATE user
+		SET userId = #{userId}, name = #{name}, gender = #{gender}, phone = #{phone}
+		WHERE userNo = #{userNo}
+	</update>
+	
+	<delete id="deleteUser" parameterType="_int">
+		DELETE FROM user WHERE userNo = #{userNo}
+	</delete>
 	
 </mapper>
