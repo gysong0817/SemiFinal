@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.miniproject.dto.BoardDTO;
 import com.miniproject.service.BoardService;
@@ -25,7 +26,6 @@ public class BoardController {
 	@Autowired
 	private BoardService service;
 	
-	// getBoardByBoardNo
 	@RequestMapping(value = "/board/{boardNo}", method = RequestMethod.GET)
 	public String getBoardByBoardNo(@PathVariable int boardNo, Model model) {
 		BoardDTO board = null;
@@ -90,4 +90,14 @@ public class BoardController {
 		}
 		return view;
 	}
+	
+	@RequestMapping(value = "/boardDetail", method = RequestMethod.GET)
+	public String boardDetail(@RequestParam("boardNo") int boardNo, Model model) {
+	    BoardDTO board = service.getBoardByBoardNo(boardNo);
+
+	    model.addAttribute("board", board);
+
+	    return "boardDetail";
+	}
+
 }
