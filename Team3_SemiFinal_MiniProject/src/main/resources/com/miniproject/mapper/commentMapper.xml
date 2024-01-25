@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.miniproject.mapper.commentMapper">
+<mapper namespace="com.miniproject.mapper.CommentMapper">
 
 
-<!-- 댓글등록 -->
+	<!-- 댓글등록 -->
   	<insert id="insertConmment"
-  			parameterType="com.miniproject.dto.CommentDto">
+  			parameterType="com.miniproject.dto.CommentDTO">
   	
   		insert into comment (commentNo, boardNo, content, userId, regDate, modDate)
   		values(#{commentNo}, #{boardNo}, #{content}, #{userId}, #{regDate}, #{modDate})
@@ -14,9 +14,9 @@
   	
   	<!--댓글 수정  -->
   	<update id="updateComment"
-  			parameterType="com.miniproject.dto.CommentDto">
+  			parameterType="com.miniproject.dto.CommentDTO">
   		UPDATE comment
-  		SET content =#{content}
+  		SET content = #{content}
   			modDate = #{modDate}
   		WHERE commentNo = #{commentNo}
   	</update>

@@ -20,7 +20,7 @@ public class MainController {
 	
 	@Autowired
 	private MainService service;
-
+	
 	@GetMapping("/search")
 	public String moveSearch() {
 		return "search";
@@ -42,8 +42,6 @@ public class MainController {
 		List<BoardDTO> boardList = service.getBoardBySeachWithPage(pageRequest);
 		
 		int totalCount = service.getTotalCount(pageRequest);
-		
-		
 		
 		PageResponseDTO pageResponse = new PageResponseDTO().builder()
 										.total(totalCount)

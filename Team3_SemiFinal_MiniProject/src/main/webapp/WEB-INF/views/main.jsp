@@ -158,7 +158,7 @@ tbody tr:nth-child(even) {
 	</div>
 	<a class="new-post-btn" href="<c:url value='/new-post'/>">새로운 글 작성</a>
 	<c:if test="${empty userId}">
-		<a class="signup-btn" href="<c:url value='/signup'/>">Sign Up</a>
+		<a class="signup-btn" href="<c:url value='/join'/>">Sign Up</a>
 		<a class="login-btn" href="<c:url value='/login'/>">Login</a>
 	</c:if>
 	<c:if test="${not empty userId}">
