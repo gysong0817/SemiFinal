@@ -1,5 +1,8 @@
 package com.miniproject.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,44 +55,45 @@ public class BoardController {
 		return "updateBoard";
 	}
 	
-	@RequestMapping(value = "/board/{boardno}", method = RequestMethod.PUT)
-	public String updateBoard(@PathVariable int boardno,
-							@ModelAttribute BoardDTO newBoard) {
-		
-		String view = "error";
-		
-		BoardDTO board = null;
-		boolean result = false;
-		
-		board = service.getBoardByBoardNo(boardno);
-		
-		board.setTitle(newBoard.getTitle());
-		board.setContent(newBoard.getContent());
-		
-		result = service.updateBoard(board);
-		
-		
-		if (result) {
-			view = "redirect:/board/" + boardno;
-			return view;
-		}
-		return view;
+	@RequestMapping(value = "/board/{boardno}", method = RequestMethod.POST)
+	public String updateBoard(@PathVariable int boardno, @ModelAttribute("newBoard") BoardDTO newBoard) {
+	    String view = "error";
+
+	    BoardDTO board = null;
+	    boolean result = false;
+
+	    board = service.getBoardByBoardNo(boardno);
+
+	    board.setTitle(newBoard.getTitle());
+	    board.setContent(newBoard.getContent());
+
+	    result = service.updateBoard(board);
+
+	    if (result) {
+	        view = "redirect:/board/" + boardno;
+	    }
+
+	    return view;
 	}
 	
-	@RequestMapping(value= "/board/{boardno}", method = RequestMethod.DELETE)
-	public String DeleteBoard(@PathVariable int boardNo) {
-		
-		String view ="error";
-		boolean result = false;
-		
-		result = service.deleteBoardByBoradNo(boardNo);
-		
-		if(result) {
-			view ="redirect:/main";
-			return view;
-		}
-		return view;
+	@RequestMapping(value = "/board/{boardNo}", method = RequestMethod.DELETE)
+	public ResponseEntity<Map<String, String>> deleteBoard(@PathVariable(name = "boardNo") int boardNo) {
+	    Map<String, String> response = new HashMap<>();
+	    try {
+	        service.deleteBoardByBoradNo(boardNo);
+	        response.put("message", "게시물이 삭제되었습니다.");
+	        return ResponseEntity.ok(response);
+	    } catch (BoardDeleteException e) {
+	        response.put("message", e.getMessage());
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+	    } catch (Exception e) {
+	        logger.error("Error deleting board with boardNo: " + boardNo, e);
+	        response.put("message", "게시물 삭제 중 오류가 발생했습니다.");
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+	    }
 	}
+
+
 	
 	@RequestMapping(value = "/boardDetail", method = RequestMethod.GET)
 	public String boardDetail(@RequestParam("boardNo") int boardNo, Model model) {
@@ -99,5 +103,13 @@ public class BoardController {
 
 	    return "boardDetail";
 	}
+	
+	public class BoardDeleteException extends RuntimeException {
 
+	    public BoardDeleteException(String message) {
+	        super(message);
+	    }
+	}
+
+	
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.miniproject.dto.BoardDTO;
+import com.miniproject.exception.BoardDeleteException;
 import com.miniproject.mapper.BoardMapper;
 
 @Service
@@ -15,18 +16,12 @@ public class BoardService {
 	BoardMapper mapper;
 
 	public List<BoardDTO> getAllBoard() {
-		List<BoardDTO> boardList = null;
-
-		boardList = mapper.getAllBoard();
-
+		List<BoardDTO> boardList = mapper.getAllBoard();
 		return boardList;
 	}
 
 	public BoardDTO getBoardByBoardNo(int boardNo) {
-		BoardDTO board = null;
-
-		board = mapper.getBoardByBoardNo(boardNo);
-
+		BoardDTO board = mapper.getBoardByBoardNo(boardNo);
 		return board;
 	}
 	
@@ -35,28 +30,16 @@ public class BoardService {
 	}
 	
 	public boolean updateBoard(BoardDTO board) {
-		boolean result = false;
-
-		int res = mapper.updateBoard(board);
-		if (res != 0) {
-			result = true;
-		} else {
-			new Exception("게시판 수정 실패");
-		}
-
-		return result;
+	    int res = mapper.updateBoard(board);
+	    return res != 0;
 	}
 
-	public boolean deleteBoardByBoradNo(int boardNo) {
-		boolean result = false;
-
+	public void deleteBoardByBoradNo(int boardNo) {
 		int res = mapper.deleteBoardByBoradNo(boardNo);
 
-		if (res != 0) {
-			result = true;
-			return result;
+		if (res == 0) {
+			throw new BoardDeleteException("게시물 삭제에 실패했습니다.");
 		}
-		return false;
 	}
-
 }
+

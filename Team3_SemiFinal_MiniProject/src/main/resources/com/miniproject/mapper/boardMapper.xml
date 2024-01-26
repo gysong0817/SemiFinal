@@ -28,7 +28,7 @@
 	<delete id="deleteBoardByBoradNo" 
 			parameterType="_int">
 		DELETE 
-		FROM boardNo
+		FROM board
 		WHERE boardNo = #{boardNo}
 	</delete>
 	
