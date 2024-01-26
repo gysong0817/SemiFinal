@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.miniproject.dto.BoardDTO;
+import com.miniproject.dto.UserDTO;
 import com.miniproject.mapper.BoardMapper;
 
 @Service
@@ -30,8 +31,18 @@ public class BoardService {
 		return board;
 	}
 	
-	public void createBoard(BoardDTO boardDTO) {
-		mapper.insertBoard(boardDTO);
+	public boolean createBoard(BoardDTO boardDTO) {
+		boolean result = false;
+		
+		int res = mapper.createBoard(boardDTO);
+		
+		if (res != 0) {
+			result = true;
+		} else {
+			new Exception("부서 생성 실패");
+		}
+		
+		return result;
 	}
 	
 	public boolean updateBoard(BoardDTO board) {
@@ -58,5 +69,17 @@ public class BoardService {
 		}
 		return false;
 	}
+
+	public UserDTO getUserByUserId(String userId) {
+		UserDTO user = mapper.getUserByUserId(userId);
+		System.out.println(user);
+		return user;
+	}
+
+	public BoardDTO getUserId() {
+		
+		return null;
+	}
+
 
 }

@@ -48,6 +48,10 @@
             <th>Category Index</th>
             <td>${board.categoryIdx}</td>
         </tr>
+	    <tr>
+	        <th>file:</th>
+	        <td>${file.fileOriginalName}</td>
+	    </tr>
     </table>
 
     <div>
@@ -55,6 +59,7 @@
         <p>${board.content}</p>
     </div>
 </c:if>
+
 
 <a href="<c:url value='/main'/>">목록으로 돌아가기</a>
 

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.miniproject.mapper.FileMapper">
+ 	
+ 	<insert id="createFile"
+ 			parameterType="com.miniproject.dto.FileDTO">
+		INSERT INTO boardfile
+			(filePath,
+			fileName,
+			fileOriginalName,
+			fileSize,
+			boardNo
+			)
+		VALUES (
+  			#{filePath},
+			#{fileName},
+			#{fileOriginalName},
+			#{fileSize},
+			#{boardNo}
+			)		
+ 	</insert>
+ 	
+ 	<select id="getFileByBoardNo"
+ 			parameterType="_int">
+ 		SELECT *
+ 		FROM boardfile
+ 		WHERE boardNo = #{boardNo}
+ 	</select>
+ 	
+ 	
+</mapper>	
