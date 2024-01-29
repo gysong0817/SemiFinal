@@ -1,9 +1,6 @@
 package com.miniproject.controller;
-
 import java.util.ArrayList;
-
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,11 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.miniproject.dto.CommentDTO;
 import com.miniproject.dto.UserDTO;
 import com.miniproject.service.CommentService;
-
 @Controller
 @RequestMapping("/comment")
 public class CommentController {
@@ -26,9 +21,10 @@ public class CommentController {
 	
 	@ResponseBody
 	@RequestMapping("/list")
-	public ArrayList<CommentDTO> CommentList(@RequestParam("boardNo")int boardNo, Model model){
-		return service.CommentList(boardNo);
-		
+	public String CommentList(@RequestParam("boardNo")int boardNo, Model model){
+	    ArrayList<CommentDTO> comments = service.CommentList(boardNo);
+	    model.addAttribute("comments", comments);
+	    return "Boardview"; // 댓글 목록을 포함한 화면으로 이동
 	}
 	
 	
@@ -41,11 +37,16 @@ public class CommentController {
 	
 	@ResponseBody
 	@PostMapping("insert")
-	public String PostInsertComent(CommentDTO dto, HttpSession session,Model model) {
-		UserDTO tmp=(UserDTO) session.getAttribute("userId");
-		dto.setUserId(tmp.getUserId());
-		
-		return service.insertComment(dto);
+	public String PostInsertComment(CommentDTO dto, HttpSession session, Model model) {
+	    Object tmp = session.getAttribute("userId");
+	    if (tmp != null && tmp instanceof UserDTO) {
+	        UserDTO userDTO = (UserDTO) tmp;
+	        dto.setUserId(userDTO.getUserId());
+	    } else {
+	        // 세션에서 "userId"가 UserDTO 형태로 저장되어 있지 않을 경우에 대한 처리
+	        // 예를 들어 로그인이 되어 있지 않은 상태 등
+	    }
+	    return service.insertComment(dto);
 	}
 	
 	@GetMapping("update")

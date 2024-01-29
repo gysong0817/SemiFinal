@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.miniproject.mapper.CommentMapper">
-
-
 	<!-- 댓글등록 -->
-  	<insert id="insertConmment"
-  			parameterType="com.miniproject.dto.CommentDTO">
-  	
-  		insert into comment (commentNo, boardNo, content, userId, regDate, modDate)
-  		values(#{commentNo}, #{boardNo}, #{content}, #{userId}, #{regDate}, #{modDate})
-  	
-  	</insert>
+	<insert id="insertComment" parameterType="com.miniproject.dto.CommentDTO">
+	    <selectKey keyProperty="commentNo" order="BEFORE" resultType="int">
+	        SELECT IFNULL(MAX(commentNo), 0) + 1 AS commentNo FROM comment
+	    </selectKey>
+	    INSERT INTO comment (commentNo, boardNo, content, userId, regDate, modDate)
+	    VALUES (#{commentNo}, #{boardNo}, #{content}, #{userId}, #{regDate}, #{modDate})
+	</insert>
+	<select id="getCommentsByBoardNo" resultType="com.miniproject.dto.CommentDTO">
+    	SELECT * FROM comment WHERE boardNo = #{boardNo} ORDER BY regDate DESC
+	</select>	
   	
   	<!--댓글 수정  -->
   	<update id="updateComment"
@@ -24,9 +25,8 @@
   	<!-- 댓글 삭제 -->
   		<delete id="deleteComment"
  			parameterType="_int">
- 		DELETE 
+ 		DELETE
  		FROM comment
  		WHERE commentNo = #{commentNo}	
  	</delete>
-
 </mapper>
