@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<<<<<<< .merge_file_a13720
-
-=======
 <%@ page import="java.util.Optional" %>
->>>>>>> .merge_file_a09912
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,9 +8,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>게시물 상세 내용</title>
-<<<<<<< .merge_file_a13720
-
-=======
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -52,7 +45,6 @@
             cursor: pointer;
         }
     </style>
->>>>>>> .merge_file_a09912
 </head>
 <body>
 <h1>게시물 상세 내용</h1>
@@ -95,21 +87,12 @@
 	        <td>${file.fileOriginalName}</td>
 	    </tr>
     </table>
-<<<<<<< .merge_file_a13720
 
     <div>
         <strong>Content:</strong>
         <p>${board.content}</p>
     </div>
 
-	<c:if test="${not empty userId and userId eq board.userId}">
-	        <form:form method="POST" action="<c:url value='/board/${board.boardNo}'/>" modelAttribute="board" id="deleteForm">
-	            <form:hidden path="_method" value="DELETE" />
-	            <button type="button" class="delete-btn" onclick="confirmDelete('${board.boardNo}', '${userId}')">삭제</button>
-	        </form:form>
-	        <a href="<c:url value='/modify/board/${board.boardNo}'/>">게시물 수정</a>
-	</c:if>
-=======
     <c:if test="${not empty userId and userId eq board.userId}">
         <form:form method="POST" action="<c:url value='/board/${board.boardNo}'/>" modelAttribute="board" id="deleteForm">
             <form:hidden path="_method" value="DELETE" />
@@ -117,15 +100,10 @@
         </form:form>
         <a href="<c:url value='/modify/board/${board.boardNo}'/>">게시물 수정</a>
     </c:if>
->>>>>>> .merge_file_a09912
 </c:if>
 <a href="<c:url value='/main'/>">목록으로 돌아가기</a>
 <script>
-<<<<<<< .merge_file_a13720
 
-</script>
-
-=======
 document.getElementById("commentForm").addEventListener("submit", function(event) {
     event.preventDefault();
     var formData = new FormData(this);
@@ -177,9 +155,9 @@ function refreshComments(boardNo) {
 					<td><br>
 					<br>
 					<div>
-					<button type="submit" class="insert">댓글 작성</button>
-					<button type="submit" class="update">댓글 수정</button>
-					<button type="submit" class="delete">댓글 삭제</button></td>
+						<button type="submit" class="insert">댓글 작성</button>
+						<button type="submit" class="update">댓글 수정</button>
+						<button type="submit" class="delete">댓글 삭제</button></td>
 					</div>
 				</tr>
 			</table>
@@ -196,6 +174,5 @@ function refreshComments(boardNo) {
         </div>
     </c:forEach>
 </div>
->>>>>>> .merge_file_a09912
 </body>
 </html>
