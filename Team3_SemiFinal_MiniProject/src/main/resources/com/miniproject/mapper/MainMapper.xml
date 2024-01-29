@@ -5,7 +5,7 @@
 	<select id="getBoardBySearchKeyword"
 			parameterType="String"
 			resultType="com.miniproject.dto.BoardDTO">
-		SELECT title, content, userId, regDate, modDate, viewCnt, categoryIdx
+		SELECT boardNo, title, content, userId, regDate, modDate, viewCnt, categoryIdx
 		FROM board
 		<trim prefix="WHERE">
 			<if test="searchKeyword != null">
@@ -30,7 +30,7 @@
 			parameterType="com.miniproject.dto.PageRequestDTO"
 			resultType="com.miniproject.dto.BoardDTO">
 		<bind name="start" value="(pageNum-1)*amount"/>
-		SELECT title, content, userId, regDate, modDate, viewCnt, categoryIdx
+		SELECT boardNo, title, content, userId, regDate, modDate, viewCnt, categoryIdx
 		FROM board
 		<trim prefix="WHERE">
 			<if test="searchKeyword != null">

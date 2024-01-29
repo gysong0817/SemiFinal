@@ -24,7 +24,7 @@ public class UserController {
 	// getUserNoByUserId (userId를 입력받아 userNo를 반환)
 	public int getUserNoByUserId(@PathVariable String userId) {
 		int userNo = 0;
-
+		
 		userNo = service.getUserNoByUserId(userId);
 
 		return userNo;

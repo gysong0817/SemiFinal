@@ -156,15 +156,21 @@ tbody tr:nth-child(even) {
 			</nav>
 		</div>
 	</div>
-	<a class="new-post-btn" href="<c:url value='/new-post'/>">새로운 글 작성</a>
+	<a class="new-post-btn" href="<c:url value='/board'/>">새로운 글 작성</a>
 	<c:if test="${empty userId}">
-		<a class="signup-btn" href="<c:url value='/join'/>">Sign Up</a>
-		<a class="login-btn" href="<c:url value='/login'/>">Login</a>
+		<a class="signup-btn" href="<c:url value='/join'/>">회원가입</a>
+		<a class="login-btn" href="<c:url value='/login'/>">로그인</a>
 	</c:if>
 	<c:if test="${not empty userId}">
-		<a class="logout-btn" href="<c:url value='/logout'/>">Logout</a>
+		<a class="logout-btn" href="<c:url value='/logout'/>">로그아웃</a>
+		<tr>
+			<td colspan="2" align="center">
+				<button type="button" onclick="removeMember();">탈퇴하기</button>
+				<input type="hidden" name="userId" value="${sessionScope.userId}">
+			</td>
+		</tr>
 	</c:if>
-
+	
 	<script type="text/javascript">
     document.addEventListener("DOMContentLoaded", function () {
         var boardLinks = document.querySelectorAll('.board-link');
@@ -207,6 +213,12 @@ function checkKeyword() {
 	let mainForm = document.getElementById('mainForm');
 	if(mainForm.searchKeyword.value === null || mainForm.searchKeyword.value === '') {
 		mainForm.searchKeyword.remove();
+	}
+}
+
+function removeMember() {
+	if(window.confirm("탈퇴하시겠습니까?")){
+	location.href="/out";
 	}
 }
 </script>

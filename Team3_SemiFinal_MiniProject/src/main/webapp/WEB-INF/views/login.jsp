@@ -7,7 +7,7 @@
 
 <h1>Login</h1>
 
-<form action="<c:url value='/login'/>" method="post">
+<form action="/login" method="post">
     <label for="userId">User ID:</label>
     <input type="text" id="userId" name="userId" required/><br/>
     <label for="password">Password:</label>
@@ -16,6 +16,7 @@
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     
     <input type="submit" value="Login"/>
+    <a href="/main">메인으로 돌아가기</a>
 </form>
 
 </body>

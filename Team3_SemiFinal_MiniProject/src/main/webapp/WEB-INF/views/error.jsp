@@ -7,6 +7,6 @@
 <title>error</title>
 </head>
 <body>
-
+	<h2>에러 페이지</h2>
 </body>
 </html>

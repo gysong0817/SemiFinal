@@ -58,9 +58,15 @@
         <strong>Content:</strong>
         <p>${board.content}</p>
     </div>
+
+	<c:if test="${not empty userId and userId eq board.userId}">
+	        <form:form method="POST" action="<c:url value='/board/${board.boardNo}'/>" modelAttribute="board" id="deleteForm">
+	            <form:hidden path="_method" value="DELETE" />
+	            <button type="button" class="delete-btn" onclick="confirmDelete('${board.boardNo}', '${userId}')">삭제</button>
+	        </form:form>
+	        <a href="<c:url value='/modify/board/${board.boardNo}'/>">게시물 수정</a>
+	</c:if>
 </c:if>
-
-
 <a href="<c:url value='/main'/>">목록으로 돌아가기</a>
 
 <script>
