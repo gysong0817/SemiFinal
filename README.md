@@ -33,7 +33,7 @@ Github : https://github.com/gysong0817/SemiFinal.git
 ## ⚙️ 기술 스택
 - **Server** : Apache Tomcat v9.0
 - **DataBase** : MySQL
-- **아이디어 회의** : Slack, Zoom
+- **아이디어 회의** : Slack, Zoom, Codeshare
 
 ## 📌 주요 기능
 - 회원 기능
