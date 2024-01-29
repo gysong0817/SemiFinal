@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <%@ page import="java.util.Optional" %>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,12 +11,12 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
+            background-color: #F8F9FA;
             margin: 20px;
         }
         h1 {
             text-align: center;
-            color: #343a40;
+            color: #343A40;
         }
         table {
             width: 60%;
@@ -31,7 +29,7 @@
             text-align: left;
         }
         th {
-            background-color: #007bff;
+            background-color: #007BFF;
             color: #fff;
         }
         .content {
@@ -39,7 +37,7 @@
         }
         .delete-btn {
             margin-top: 10px;
-            background-color: #dc3545;
+            background-color: #DC3545;
             color: #fff;
             padding: 8px 16px;
             border: none;
@@ -49,9 +47,7 @@
     </style>
 </head>
 <body>
-
 <h1>게시물 상세 내용</h1>
-
 <c:if test="${not empty board}">
     <table>
         <tr>
@@ -87,7 +83,6 @@
             <td>${board.categoryIdx}</td>
         </tr>
     </table>
-
     <c:if test="${not empty userId and userId eq board.userId}">
         <form:form method="POST" action="<c:url value='/board/${board.boardNo}'/>" modelAttribute="board" id="deleteForm">
             <form:hidden path="_method" value="DELETE" />
@@ -96,15 +91,11 @@
         <a href="<c:url value='/modify/board/${board.boardNo}'/>">게시물 수정</a>
     </c:if>
 </c:if>
-
 <a href="<c:url value='/main'/>">목록으로 돌아가기</a>
-
 <script>
 document.getElementById("commentForm").addEventListener("submit", function(event) {
     event.preventDefault();
-
     var formData = new FormData(this);
-
     fetch("/comment/insert", {
         method: "POST",
         body: formData
@@ -122,7 +113,6 @@ document.getElementById("commentForm").addEventListener("submit", function(event
         alert("댓글 작성에 실패했습니다.");
     });
 });
-
 function loadComments(boardNo) {
     $.ajax({
         url: "/api/comments/" + boardNo,
@@ -137,14 +127,11 @@ function loadComments(boardNo) {
         }
     });
 }
-
 function refreshComments(boardNo) {
     // 댓글 목록을 가져오는 함수 호출
     loadComments(boardNo);
 }
 </script>
-
-
 	<div class="container">
 	<div class="form-group">
 		<form method="post" action="<c:url value='/comment/insert'/>">
@@ -176,6 +163,5 @@ function refreshComments(boardNo) {
         </div>
     </c:forEach>
 </div>
-
 </body>
 </html>
